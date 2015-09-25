@@ -1,0 +1,16 @@
+### An example configuration file
+# Config!
+
+# Staff, for /mailstaff
+# Be sure to use full usernames!
+staff:
+  - Ninniy
+  - 1b8
+  - Cpl_OtterPaws
+  - DrWily
+  
+templates:
+  example: "[OneB] %s"
+  
+spies:
+  -

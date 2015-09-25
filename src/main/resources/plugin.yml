@@ -1,0 +1,86 @@
+name: OneB
+main: net.kronosville.oneb.OneB
+version: 1.4.2
+author: 1b8
+commands:
+  dovahzul:
+    description: Dovahzul translator
+    usage: "[E|D] [message]"
+    permission: oneb.dovahzul
+    aliases: [dt, dovah, dov]
+    default: op
+  dovahzulchat:
+    description: In-chat Dovahzul translator
+    permission: oneb.dovahzul.chat
+    aliases: [dc, dtc, dchat]
+    default: op
+  pvp:
+    description: Toggle PvP
+    aliases: [pvptoggle, togglepvp]
+    default: true
+  addlore:
+    description: Add lore to an item
+    permission: oneb.items.addlore
+    usage: "[add [lore]|set [lore]|delete]"
+    aliases: [lore, al]
+    default: op
+  rename:
+    description: Rename an item
+    permission: oneb.items.rename
+    usage: "[name]"
+    aliases: [name]
+    default: op
+  mailstaff:
+    description: Mail all staff members
+    permission: oneb.mailstaff
+    usage: "[message]"
+    aliases: [ms]
+    default: op
+  oneb:
+    description: Reload config
+    permission: oneb.admin
+    usage: "reload"
+    default: false
+  onebfakemessage:
+    description: Send a message to players
+    permission: oneb.message
+    usage: "[[template]|player|all|list] [[player]|message] [message]"
+    aliases: [fakemessage, fakemsg, fmessage, fm, fmsg]
+    default: op
+  onebcommandspy:
+    description: Spy on players' commands
+    permission: oneb.admin
+    usage: ""
+    aliases: [commandspy, 1bcs]
+    default: false
+
+permissions:
+  oneb.*:
+    description: Gives access to all OneB commands and permissions.
+    children:
+      oneb.dovahzul.*: true
+      oneb.items.*: true
+  oneb.dovahzul.*:
+    description: Gives access to the Dovahzul translator and in-chat Dovahzul translator.
+    default: op
+  oneb.dovahzul:
+    description: Gives access to the Dovahzul translator.
+    default: op
+  oneb.dovahzul.chat:
+    description: Gives access to the in-chat Dovahzul translator.
+    default: op
+  oneb.items.*:
+    description: Gives access to /addlore and /rename
+    children:
+      oneb.items.addlore: true
+      oneb.items.rename: true
+    default: op
+  oneb.items.addlore:
+    description: Gives access to /addlore
+  oneb.items.rename:
+    description: Gives access to /rename
+  oneb.mailstaff:
+    description: Gives access to /mailstaff
+    default: op
+  oneb.admin:
+    description: Gives access to admin commands
