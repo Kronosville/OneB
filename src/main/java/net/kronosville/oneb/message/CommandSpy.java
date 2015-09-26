@@ -36,7 +36,6 @@ public final class CommandSpy implements org.bukkit.command.CommandExecutor, org
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		
 		String id;
 		if (sender instanceof Player) {
 			id = ((Player) sender).getUniqueId().toString();
