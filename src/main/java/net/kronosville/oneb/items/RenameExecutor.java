@@ -1,4 +1,4 @@
-package net.kronosville.oneb.rename;
+package net.kronosville.oneb.items;
 
 import java.util.ArrayList;
 import java.util.Arrays;

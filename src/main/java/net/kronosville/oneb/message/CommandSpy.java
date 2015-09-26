@@ -17,7 +17,7 @@ public final class CommandSpy implements org.bukkit.command.CommandExecutor, org
 	private final OneB plugin;
 	public CommandSpy(OneB plugin) {
 		this.plugin = plugin;
-		plugin.getConfig().getStringList("spies");
+		spies = plugin.getConfig().getStringList("spies");
 	}
 	
 	private final String consoleId = "console";
