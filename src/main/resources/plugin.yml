@@ -30,6 +30,11 @@ commands:
     usage: "[name]"
     aliases: [name]
     default: op
+  hat:
+    description: Wear any item on your head
+    permission: oneb.items.hat
+    aliases: [sethat, helmet, helm, sethelmet, sethelm]
+    default: op
   mailstaff:
     description: Mail all staff members
     permission: oneb.mailstaff
@@ -79,6 +84,8 @@ permissions:
     description: Gives access to /addlore
   oneb.items.rename:
     description: Gives access to /rename
+  oneb.items.hat:
+    description: Wear any item on your head
   oneb.mailstaff:
     description: Gives access to /mailstaff
     default: op

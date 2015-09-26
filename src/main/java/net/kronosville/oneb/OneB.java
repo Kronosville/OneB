@@ -7,11 +7,12 @@ import org.bukkit.event.Listener;
 
 import net.kronosville.oneb.dovahzul.DovahzulExecutor;
 import net.kronosville.oneb.dovahzul.DovahzulListener;
+import net.kronosville.oneb.items.HatExecutor;
+import net.kronosville.oneb.items.RenameExecutor;
 import net.kronosville.oneb.message.MessageExecutor;
 import net.kronosville.oneb.message.CommandSpy;
 import net.kronosville.oneb.pvp.PvPExecutor;
 import net.kronosville.oneb.pvp.PvPListener;
-import net.kronosville.oneb.rename.RenameExecutor;
 
 // import net.kronosville.oneb.mmo.OneBMMOExecutor;
 
@@ -49,12 +50,6 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 		}
 	}
 
-	private void setExecutors(Pair... pairs) {
-		for (Pair pair : pairs) {
-			pair.cmd.setExecutor(pair.ex);
-		}
-	}
-
 	/*
 	 * Once again, Eclipse's Source > Format did this
 	 *
@@ -79,11 +74,14 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 		// Commands
 		PluginCommand transCmd = getCommand("dovahzul");
 		PluginCommand transChatCmd = getCommand("dovahzulchat");
+		
 		PluginCommand pvpCmd = getCommand("pvp");
+		
 		PluginCommand loreCmd = getCommand("addlore");
 		PluginCommand nameCmd = getCommand("rename");
+		PluginCommand hatCmd = getCommand("hat");
+		
 		PluginCommand mailStaffCmd = getCommand("mailstaff");
-
 		PluginCommand oneBCmd = getCommand("oneb");
 
 		PluginCommand spyCmd = getCommand("onebcommandspy");
@@ -109,10 +107,21 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 		CommandSpy cmdSpy = new CommandSpy(this);
 
 		// Eclipse's Source > Format did this too. It's somewhat ugly.
-		setExecutors(new Pair(transCmd, de), new Pair(transChatCmd, de), new Pair(pvpCmd, new PvPExecutor()),
-				new Pair(loreCmd, re), new Pair(nameCmd, re), new Pair(mailStaffCmd, new MailStaffExecutor(this)),
-				new Pair(oneBCmd, new OneBExecutor(this)), new Pair(spyCmd, cmdSpy),
-				new Pair(msgCmd, new MessageExecutor(this)));
+		transCmd.setExecutor(de);
+		transChatCmd.setExecutor(de);
+		
+		pvpCmd.setExecutor(new PvPExecutor());
+		
+		loreCmd.setExecutor(re);
+		nameCmd.setExecutor(re);
+		hatCmd.setExecutor(new HatExecutor());
+		
+		mailStaffCmd.setExecutor(new MailStaffExecutor(this));
+		oneBCmd.setExecutor(new OneBExecutor(this));
+		
+		spyCmd.setExecutor(cmdSpy);
+		msgCmd.setExecutor(new MessageExecutor(this));
+		
 
 		// Set event listeners
 		addListeners(new DovahzulListener(), new PvPListener(), cmdSpy);
