@@ -28,12 +28,18 @@ public final class HatExecutor implements org.bukkit.command.CommandExecutor {
 			} else {
 				target = player;
 			}
-
+			
 			ItemStack newHat = player.getItemInHand();
-			ItemStack oldHat = target.getInventory().getHelmet();
+			if (newHat != null) {
+				ItemStack oldHat = target.getInventory().getHelmet();
 
-			player.setItemInHand(oldHat);
-			target.getInventory().setHelmet(newHat);
+				player.setItemInHand(oldHat);
+				target.getInventory().setHelmet(newHat);
+				
+				OneB.sendMsg(player, "Hat set.");
+			} else {
+				OneB.sendMsg(player, "You have nothing in your hand!");
+			}
 
 		} else {
 			OneB.sendPlayerOnlyMsg(sender);
