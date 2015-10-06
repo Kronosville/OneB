@@ -1,0 +1,67 @@
+OneB Changelog
+
+Dovahzul-1.0.0
+# First release
++ Added Dovahzul translator, usable via /dt command
+
+OneB-1.1.0
+# Overhaul
+* Changed prefix from gold [TARDIS] and [T] to dark aqua [OneB]
++ Added /dc command, puts translation directly into chat
++ Added Dovahzul chat mode, togglable via /dc, translates all chat messages into Dovahzul
+* Redid system, rewrote function
+
+OneB-1.1.1
+# Couple of bugfixes
+* Fixed Dovahzul chat mode toggle messages
++ Added stylising for thuum.org error message
++ Made it so using & formatting codes doesn't break stuff
+# If you put them in the same word, it still comes out untranslated.
+
+OneB-1.2.0
+# Added PvP toggler
++ Added /pvp command, toggles PvP (or sets, if you add an argument)
++ Added /pvp who command, lists players.
+
+OneB-1.2.1
+# Auto-translate for players in Dovahzul Chat mode
++ Dovahzul chat-mode messages are automatically translated (in italics) for players in Dovahzul Chat mode
+
++ Fixed bug where you can still hit players with bows if they or you has PvP disabled
+
+OneB-1.2.2
+# Changed auto-translate output
+* Auto-translate now shows the Dovahzul message, and the translated message in italics in the same format.
+
+OneB-1.3.0
+# Added /rename , /lore and /mailstaff commands
++ Added /rename command
++ Added /addlore command
++ Added /mailstaff command
+
+OneB-1.3.1
+# Quick bugfix
+* Fixed bug where /dc with no arguments returned an error
+* Changed /mailstaff prefix (Format [Server] [StaffMail] [<player>] <message>
+* Changed /dt [ENG|DOV] [message] to /dt [E|D] [message]
++ Added special message if you try to /rename or /lore air
+
+OneB-1.3.2
+# Players who have PvP on's names are now red in the tab list
++ Made players with PvP on's names red in the player list
+
+OneB-1.3.3
+# Removed /dc [E|D] [message]
+- Removed /dc with arguments; no one uses it.
+
+OneB-1.4.0
+# Added a few commands
++ Added /oneb to reload config
+* Changed auto-translate receivers from players with D-chat enabled to players with the permission for D-chat
++ Tab list name is now set on join as well as when PvP is toggled
++ Added /onebfakemessage command
++ Added /onebcommandspy command
+
+OneB-1.4.1
+# Modified /mailstaff command
++ Made /mailstaff also message all online staff members
