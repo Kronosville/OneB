@@ -5,12 +5,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
 
+import net.kronosville.oneb.commandspy.CommandSpyExecutor;
+import net.kronosville.oneb.commandspy.CommandSpyListener;
 import net.kronosville.oneb.dovahzul.DovahzulExecutor;
 import net.kronosville.oneb.dovahzul.DovahzulListener;
 import net.kronosville.oneb.items.HatExecutor;
 import net.kronosville.oneb.items.RenameExecutor;
+import net.kronosville.oneb.mailstaff.MailStaffExecutor;
 import net.kronosville.oneb.message.MessageExecutor;
-import net.kronosville.oneb.message.CommandSpy;
 import net.kronosville.oneb.pvp.PvPExecutor;
 import net.kronosville.oneb.pvp.PvPListener;
 
@@ -66,11 +68,15 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 
 	public static String transChatPerm;
 
-	public CommandSpy oneBCommandSpy;
+	public CommandSpyExecutor oneBCommandSpy;
 
 	@Override
 	public void onEnable() {
-
+		
+		saveDefaultConfig();
+		
+		inst = this;
+		
 		// Commands
 		PluginCommand transCmd = getCommand("dovahzul");
 		PluginCommand transChatCmd = getCommand("dovahzulchat");
@@ -104,9 +110,7 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 		// Set command executors
 		DovahzulExecutor de = new DovahzulExecutor();
 		RenameExecutor re = new RenameExecutor();
-		CommandSpy cmdSpy = new CommandSpy(this);
 
-		// Eclipse's Source > Format did this too. It's somewhat ugly.
 		transCmd.setExecutor(de);
 		transChatCmd.setExecutor(de);
 		
@@ -116,15 +120,15 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 		nameCmd.setExecutor(re);
 		hatCmd.setExecutor(new HatExecutor());
 		
-		mailStaffCmd.setExecutor(new MailStaffExecutor(this));
-		oneBCmd.setExecutor(new OneBExecutor(this));
+		mailStaffCmd.setExecutor(new MailStaffExecutor());
+		oneBCmd.setExecutor(new OneBExecutor());
 		
-		spyCmd.setExecutor(cmdSpy);
-		msgCmd.setExecutor(new MessageExecutor(this));
+		spyCmd.setExecutor(new CommandSpyExecutor());
+		msgCmd.setExecutor(new MessageExecutor());
 		
-
+		
 		// Set event listeners
-		addListeners(new DovahzulListener(), new PvPListener(), cmdSpy);
+		addListeners(new DovahzulListener(), new PvPListener(), new CommandSpyListener());
 
 		// Here lies the stuff that got trashed (or not done at all)
 		// R.I.P

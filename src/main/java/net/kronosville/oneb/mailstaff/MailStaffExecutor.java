@@ -1,33 +1,33 @@
-package net.kronosville.oneb;
+package net.kronosville.oneb.mailstaff;
 
 import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class MailStaffExecutor implements CommandExecutor {
-	private final OneB plugin;
+import net.kronosville.oneb.OneB;
 
-	MailStaffExecutor(OneB plugin) {
-		this.plugin = plugin;
-		essInstalled = plugin.getServer().getPluginManager().getPlugin("Essentials") != null;
-	}
+public class MailStaffExecutor implements org.bukkit.command.CommandExecutor {
 
-	boolean essInstalled;
+	private static final OneB PLUGIN = OneB.inst();
 
-	public static void mailStaff(String senderName, String msg, OneB plugin) {
-		List<String> staff = plugin.getConfig().getStringList("staff");
+	private boolean essInstalled = PLUGIN.getServer().getPluginManager().getPlugin("Essentials") != null;
+
+	public static void mailStaff(String senderName, String msg) {
+		List<String> staff = PLUGIN.getConfig().getStringList("staff");
+
 		String fMsg = OneB.makePrefix("StaffMail") + ChatColor.GOLD + '[' + ChatColor.RESET + senderName
 				+ ChatColor.GOLD + "] " + ChatColor.RESET + msg;
-		for (String player : staff) {
-			Player craftPlayer = plugin.getServer().getPlayer(player);
-			if (craftPlayer != null) {
-				craftPlayer.sendMessage(fMsg);
+
+		for (String playerName : staff) {
+			Player player = PLUGIN.getServer().getPlayer(playerName);
+			if (player != null) {
+				player.sendMessage(fMsg);
 			}
-			plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(),
+
+			PLUGIN.getServer().dispatchCommand(PLUGIN.getServer().getConsoleSender(),
 					"mail send " + player + " " + fMsg);
 		}
 	}
@@ -37,7 +37,7 @@ public class MailStaffExecutor implements CommandExecutor {
 		if (args.length > 0) {
 
 			String msg = OneB.concat(args);
-			mailStaff(sender.getName(), msg, plugin);
+			mailStaff(sender.getName(), msg);
 
 			if (essInstalled) {
 				OneB.sendMsg(sender, "Mail sent!");

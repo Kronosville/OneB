@@ -4,11 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 public final class OneBExecutor implements org.bukkit.command.CommandExecutor {
-	private final OneB plugin;
-
-	OneBExecutor(OneB plugin) {
-		this.plugin = plugin;
-	}
+	private final OneB plugin = OneB.inst();
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
