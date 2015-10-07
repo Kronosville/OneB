@@ -1,7 +1,6 @@
 package net.kronosville.oneb.items;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -31,16 +30,12 @@ public final class HatExecutor implements org.bukkit.command.CommandExecutor {
 			}
 			
 			ItemStack newHat = player.getItemInHand();
-			if (newHat.getType() != Material.AIR) {
-				ItemStack oldHat = target.getInventory().getHelmet();
+			ItemStack oldHat = target.getInventory().getHelmet();
 
-				player.setItemInHand(oldHat);
-				target.getInventory().setHelmet(newHat);
+			player.setItemInHand(oldHat);
+			target.getInventory().setHelmet(newHat);
 				
-				OneB.sendMsg(player, "Hat set.");
-			} else {
-				OneB.sendMsg(player, "You have nothing in your hand!");
-			}
+			OneB.sendMsg(player, "Hat set.");
 
 		} else {
 			OneB.sendPlayerOnlyMsg(sender);

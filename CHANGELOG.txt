@@ -65,3 +65,7 @@ OneB-1.4.0
 OneB-1.4.1
 # Modified /mailstaff command
 + Made /mailstaff also message all online staff members
+
+OneB-1.4.2
+# Added /hat command
++ Added /hat command, like Essentials /hat but you can put hats on other players' heads with /hat [player]

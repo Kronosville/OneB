@@ -13,8 +13,10 @@ public final class PvP {
 	private PvP() {}
 	private static final OneB PLUGIN = OneB.inst();
 	
+	private static final String PVP_META = "pvpOn";
+	
 	public static boolean getPvPState(Player player) {
-		return player.hasMetadata("pvpOn");
+		return player.hasMetadata(PVP_META);
 	}
 	
 	public static String getPvPStateString(Player player) {
@@ -29,21 +31,17 @@ public final class PvP {
 	
 	public static void setPvPState(Player player, boolean state) {
 		if (state) {
-			player.setMetadata("pvpOn", new FixedMetadataValue(PLUGIN, true));
+			player.setMetadata(PVP_META, new FixedMetadataValue(PLUGIN, true));
 			player.setPlayerListName(ChatColor.RED + player.getName());
 		} else {
-			player.removeMetadata("pvpOn", PLUGIN);
+			player.removeMetadata(PVP_META, PLUGIN);
 			player.setPlayerListName(null);
 		}
 		OneB.sendMsg(player, "PvP " + getPvPStateString(player) + ".");
 	}
 	
 	public static void togglePvPState(Player player) {
-		if (getPvPState(player)) {
-			setPvPState(player, false);
-		} else {
-			setPvPState(player, true);
-		}
+		setPvPState(player, !getPvPState(player));
 	}
 	
 	/**

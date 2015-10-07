@@ -15,11 +15,14 @@ import net.kronosville.oneb.OneB;
 public final class Dovahzul {
 	// Don't let this class be instantiated
 	private Dovahzul(){}
+	private static final OneB PLUGIN = OneB.inst();
+	
+	private static final String CHAT_META = "dovahzulChat";
 	
 	public static final String T_PREFIX = OneB.makePrefix("T");
 	
 	public static boolean hasDChatOn(Player player) {
-		return player.hasMetadata("dovahzulChat");
+		return player.hasMetadata(CHAT_META);
 	}
 	
 	public static String hasDChatOnString (Player player) {
@@ -32,19 +35,15 @@ public final class Dovahzul {
 	
 	public static void setDChatState(Player player, boolean state) {
 		if (state) {
-			player.setMetadata("dovahzulChat", new FixedMetadataValue(OneB.inst(), true));
+			player.setMetadata(CHAT_META, new FixedMetadataValue(PLUGIN, true));
 		} else {
-			player.removeMetadata("dovahzulChat", OneB.inst());
+			player.removeMetadata(CHAT_META, PLUGIN);
 		}
 		OneB.sendMsg(player, "Dovahzul chat " + hasDChatOnString(player) + ".");
 	}
 	
 	public static void toggleDChatState(Player player) {
-		if (hasDChatOn(player)) {
-			setDChatState(player, false);
-		} else {
-			setDChatState(player, true);
-		}
+		setDChatState(player, !hasDChatOn(player));
 	}
 	
 	public static void sendAutoTranslated(Player sender, String untranslated) {
