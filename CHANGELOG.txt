@@ -74,4 +74,4 @@ OneB-1.4.2
 OneB-1.4.3
 # Small fixes
 * Made it so you can't wear anything with durability on your head, as this could lead to exploits
-* Fixed /oneb with no arguments not working and throwing an error
+* Fixed /oneb with no arguments not working and throwing an error; made it show the version number instead.
