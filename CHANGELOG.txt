@@ -69,8 +69,9 @@ OneB-1.4.1
 OneB-1.4.2
 # Added /hat command
 + Added /hat command, like Essentials /hat but you can put hats on other players' heads with /hat [player]
-+ Make /1bcs available to the console
++ Made /1bcs available to the console
 
 OneB-1.4.3
-# Small fix
+# Small fixes
 * Made it so you can't wear anything with durability on your head, as this could lead to exploits
+* Fixed /oneb with no arguments not working and throwing an error

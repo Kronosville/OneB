@@ -1,6 +1,6 @@
 name: OneB
 main: net.kronosville.oneb.OneB
-version: 1.4.2
+version: 1.4.3
 author: 1b8
 commands:
   dovahzul:

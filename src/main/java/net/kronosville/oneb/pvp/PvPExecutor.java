@@ -8,7 +8,6 @@ import net.kronosville.oneb.OneB;
 
 public final class PvPExecutor implements org.bukkit.command.CommandExecutor {
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args[0].equalsIgnoreCase("list")) {

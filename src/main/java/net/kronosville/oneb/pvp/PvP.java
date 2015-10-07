@@ -45,12 +45,10 @@ public final class PvP {
 	}
 	
 	/**
-	 * @deprecated
 	 * Tab now shows the names of players with PvP enabled in red,
 	 * making this function redundant.
 	 * @param receiver The receiver of the player list
 	 */
-	@Deprecated
 	public static void listPlayers(CommandSender receiver) {
 		for (Player player : Bukkit.getServer().getOnlinePlayers()) {
 			ChatColor colour;

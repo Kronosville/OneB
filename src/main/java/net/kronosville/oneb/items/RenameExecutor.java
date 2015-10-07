@@ -14,6 +14,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import net.kronosville.oneb.OneB;
 
+/**
+ * 
+ * The RenameExecutor class is the executor
+ * for both the /rename and /lore commands,
+ * as they perform extremely similar operations.
+ * 
+ * @author 1b8
+ *
+ */
 public final class RenameExecutor implements org.bukkit.command.CommandExecutor {
 	
 	private String convert(String[] arr) {
@@ -23,7 +32,7 @@ public final class RenameExecutor implements org.bukkit.command.CommandExecutor 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		String cmdName = cmd.getName();
-
+		
 		if (sender instanceof Player) {
 
 			if (args.length > 0) {

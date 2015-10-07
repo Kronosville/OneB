@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 
 import net.kronosville.oneb.commandspy.CommandSpyExecutor;
 import net.kronosville.oneb.commandspy.CommandSpyListener;
+import net.kronosville.oneb.dovahzul.DovahzulChatExecutor;
 import net.kronosville.oneb.dovahzul.DovahzulExecutor;
 import net.kronosville.oneb.dovahzul.DovahzulListener;
 import net.kronosville.oneb.items.HatExecutor;
@@ -106,16 +107,16 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 		transChatPerm = transChatCmd.getPermission();
 
 		// Set command executors
-		DovahzulExecutor de = new DovahzulExecutor();
-		RenameExecutor re = new RenameExecutor();
 
-		transCmd.setExecutor(de);
-		transChatCmd.setExecutor(de);
+		transCmd.setExecutor(new DovahzulExecutor());
+		transChatCmd.setExecutor(new DovahzulChatExecutor());
 		
 		pvpCmd.setExecutor(new PvPExecutor());
 		
+		RenameExecutor re = new RenameExecutor();
 		loreCmd.setExecutor(re);
 		nameCmd.setExecutor(re);
+		
 		hatCmd.setExecutor(new HatExecutor());
 		
 		mailStaffCmd.setExecutor(new MailStaffExecutor());

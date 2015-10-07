@@ -8,28 +8,11 @@ public final class OneBExecutor implements org.bukkit.command.CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		switch (args[0]) {
-		case "reload":
+		if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
 			plugin.reloadConfig();
 			OneB.sendMsg(sender, "Config reloaded.");
-			break;
-
-		/* 
-		 * Eclipse's Source > Format did this...
-		 * 
-		 * case "extrahearts": case "eh": String state; if
-		 * (plugin.ehTaskCancelled) {
-		 * 
-		 * plugin.startEhTask(); plugin.ehTaskCancelled = false; state =
-		 * OneB.ENABLED; } else {
-		 * 
-		 * plugin.ehTask.cancel(); plugin.ehTaskCancelled = true; state =
-		 * OneB.DISABLED; } OneB.sendMsg(sender, "ExtraHearts task " + state +
-		 * "."); break;
-		 */
-
-		default:
-			return false;
+		} else {
+			OneB.sendMsg(sender, "Server running OneB v" + plugin.getDescription().getVersion() + '.');
 		}
 		return true;
 	}
