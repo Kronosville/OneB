@@ -12,5 +12,4 @@ staff:
 templates:
   example: "[OneB] %s"
   
-spies:
-  -
+spies: []

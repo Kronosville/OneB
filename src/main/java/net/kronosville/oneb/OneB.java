@@ -68,8 +68,6 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 
 	public static String transChatPerm;
 
-	public CommandSpyExecutor oneBCommandSpy;
-
 	@Override
 	public void onEnable() {
 		
@@ -101,7 +99,7 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 		// prefixUsage(mmoCmd);
 
 		// Set permission messages
-		setPermMsgs(transCmd, transChatCmd, nameCmd, loreCmd, mailStaffCmd, oneBCmd, spyCmd, msgCmd);
+		setPermMsgs(transCmd, transChatCmd, nameCmd, loreCmd, hatCmd, mailStaffCmd, oneBCmd, spyCmd, msgCmd);
 
 		// setPermMsg(mmoCmd);
 

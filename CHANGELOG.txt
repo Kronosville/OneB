@@ -69,3 +69,4 @@ OneB-1.4.1
 OneB-1.4.2
 # Added /hat command
 + Added /hat command, like Essentials /hat but you can put hats on other players' heads with /hat [player]
++ Make /1bcs available to the console
