@@ -2,12 +2,12 @@
 # Config!
 
 # Staff, for /mailstaff
-# Be sure to use full usernames!
+# Be sure to use UUIDs!
 staff:
-  - Ninniy
-  - 1b8
-  - Cpl_OtterPaws
-  - DrWily
+  - 03b187c5-f226-4246-9af2-a7952f652d31
+  - 34eb9e87-564d-44a1-8591-8608ab491376
+  - b4325bcc-f162-4874-831c-ec1dac1850c9
+  - bf23c66f-c64c-42c9-893f-785991a3956f
   
 templates:
   example: "[OneB] %s"

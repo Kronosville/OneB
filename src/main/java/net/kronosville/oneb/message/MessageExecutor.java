@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import net.kronosville.oneb.OneB;
 
 public final class MessageExecutor implements org.bukkit.command.CommandExecutor {
-	private final OneB plugin = OneB.inst();
+	private final OneB plugin = OneB.getInst();
 	
 	// A word of warning: This file may be a bit messy.
 	

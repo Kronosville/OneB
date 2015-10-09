@@ -58,6 +58,11 @@ commands:
     usage: ""
     aliases: [commandspy, 1bcs]
     default: false
+  warptax:
+    description: Warp Tax commands
+    permission: oneb.warptax
+    aliases: [wt, wtax, tax]
+    default: true
 
 permissions:
   oneb.*:
@@ -65,6 +70,8 @@ permissions:
     children:
       oneb.dovahzul.*: true
       oneb.items.*: true
+      oneb.mailstaff: true
+      oneb.warptax: true
   oneb.dovahzul.*:
     description: Gives access to the Dovahzul translator and in-chat Dovahzul translator.
     default: op
@@ -79,6 +86,7 @@ permissions:
     children:
       oneb.items.addlore: true
       oneb.items.rename: true
+      oneb.items.hat: true
     default: op
   oneb.items.addlore:
     description: Gives access to /addlore
@@ -89,5 +97,8 @@ permissions:
   oneb.mailstaff:
     description: Gives access to /mailstaff
     default: op
+  oneb.warptax:
+    description: Gives access to /warptax
+    default: true
   oneb.admin:
     description: Gives access to admin commands

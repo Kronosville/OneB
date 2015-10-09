@@ -8,14 +8,12 @@ import java.net.URL;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.metadata.FixedMetadataValue;
 
 import net.kronosville.oneb.OneB;
 
 public final class Dovahzul {
 	// Don't let this class be instantiated
 	private Dovahzul(){}
-	private static final OneB PLUGIN = OneB.inst();
 	
 	private static final String CHAT_META = "dovahzulChat";
 	
@@ -26,18 +24,14 @@ public final class Dovahzul {
 	}
 	
 	public static String hasDChatOnString (Player player) {
-		if (hasDChatOn(player)) {
-			return OneB.ENABLED;
-		} else {
-			return OneB.DISABLED;
-		}
+		return hasDChatOn(player) ? OneB.ENABLED : OneB.DISABLED;
 	}
 	
 	public static void setDChatState(Player player, boolean state) {
 		if (state) {
-			player.setMetadata(CHAT_META, new FixedMetadataValue(PLUGIN, true));
+			OneB.setFixedMetadata(player, CHAT_META, state);
 		} else {
-			player.removeMetadata(CHAT_META, PLUGIN);
+			OneB.removeMetadata(player, CHAT_META);
 		}
 		OneB.sendMsg(player, "Dovahzul chat " + hasDChatOnString(player) + ".");
 	}

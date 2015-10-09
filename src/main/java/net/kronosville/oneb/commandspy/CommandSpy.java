@@ -11,7 +11,7 @@ public final class CommandSpy {
 	
 	static final String CONSOLE_ID = "console";
 	
-	private static final OneB PLUGIN = OneB.inst();
+	private static final OneB PLUGIN = OneB.getInst();
 	
 	static {
 		List<String> list = PLUGIN.getConfig().getStringList("spies");

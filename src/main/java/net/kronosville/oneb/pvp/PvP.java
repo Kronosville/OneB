@@ -4,14 +4,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.metadata.FixedMetadataValue;
 
 import net.kronosville.oneb.OneB;
 
 public final class PvP {
 	// Let no one instantiate this
 	private PvP() {}
-	private static final OneB PLUGIN = OneB.inst();
 	
 	private static final String PVP_META = "pvpOn";
 	
@@ -31,10 +29,10 @@ public final class PvP {
 	
 	public static void setPvPState(Player player, boolean state) {
 		if (state) {
-			player.setMetadata(PVP_META, new FixedMetadataValue(PLUGIN, true));
+			OneB.setFixedMetadata(player, PVP_META, state);
 			player.setPlayerListName(ChatColor.RED + player.getName());
 		} else {
-			player.removeMetadata(PVP_META, PLUGIN);
+			OneB.removeMetadata(player, PVP_META);
 			player.setPlayerListName(null);
 		}
 		OneB.sendMsg(player, "PvP " + getPvPStateString(player) + ".");

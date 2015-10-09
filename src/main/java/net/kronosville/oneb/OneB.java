@@ -1,21 +1,27 @@
 package net.kronosville.oneb;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.metadata.Metadatable;
+
+import net.ess3.api.IEssentials;
 
 import net.kronosville.oneb.commandspy.CommandSpyExecutor;
 import net.kronosville.oneb.commandspy.CommandSpyListener;
 import net.kronosville.oneb.dovahzul.DovahzulChatExecutor;
 import net.kronosville.oneb.dovahzul.DovahzulExecutor;
 import net.kronosville.oneb.dovahzul.DovahzulListener;
-import net.kronosville.oneb.items.HatExecutor;
-import net.kronosville.oneb.items.RenameExecutor;
-import net.kronosville.oneb.mailstaff.MailStaffExecutor;
-import net.kronosville.oneb.message.MessageExecutor;
+import net.kronosville.oneb.items.*;
+import net.kronosville.oneb.mailstaff.*;
+import net.kronosville.oneb.message.*;
 import net.kronosville.oneb.pvp.PvPExecutor;
 import net.kronosville.oneb.pvp.PvPListener;
+import net.kronosville.oneb.warptax.WarpTaxExecutor;
 
 // import net.kronosville.oneb.mmo.OneBMMOExecutor;
 
@@ -27,10 +33,6 @@ import net.kronosville.oneb.pvp.PvPListener;
  */
 public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 
-	public static String makePrefix(String str) {
-		return ChatColor.DARK_AQUA + "[" + str + "] " + ChatColor.RESET;
-	}
-
 	// Prefix
 	public static final String PREFIX = makePrefix("OneB");
 
@@ -38,71 +40,39 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 	public static final String ENABLED = ChatColor.GREEN + "enabled" + ChatColor.RESET;
 	public static final String DISABLED = ChatColor.RED + "disabled" + ChatColor.RESET;
 
-	// Access denied message
-	private static final String ACCESS_DENIED = PREFIX + "Access denied.";
-
-	private static void prefixUsages(PluginCommand... cmds) {
-		for (PluginCommand cmd : cmds) {
-			cmd.setUsage(PREFIX + "Usage: /<command> " + cmd.getUsage());
-		}
-	}
-
-	private static void setPermMsgs(PluginCommand... cmds) {
-		for (PluginCommand cmd : cmds) {
-			cmd.setPermissionMessage(ACCESS_DENIED);
-		}
-	}
-
-	/*
-	 * Once again, Eclipse's Source > Format did this
-	 *
-	 * 'Twas for Extra Hearts Per Nearby Player BukkitTask ehTask; boolean
-	 * ehTaskCancelled = false;
-	 * 
-	 * ConfigurationSection getEhConfig() { return
-	 * getConfig().getConfigurationSection("extra-hearts"); }
-	 * 
-	 * /* void startEhTask() { // TODo: Maybe make delay shorter? if
-	 * (getEhConfig().getBoolean("enabled")) { ehTask = new
-	 * ExtraHeartsTask(this).runTaskTimer(this, 100, 180); } }
-	 */
+	private static OneB inst;
 
 	public static String transChatPerm;
 
 	@Override
 	public void onEnable() {
-		
 		saveDefaultConfig();
-		
 		inst = this;
-		
+
 		// Commands
 		PluginCommand transCmd = getCommand("dovahzul");
 		PluginCommand transChatCmd = getCommand("dovahzulchat");
-		
+
 		PluginCommand pvpCmd = getCommand("pvp");
-		
+
 		PluginCommand loreCmd = getCommand("addlore");
 		PluginCommand nameCmd = getCommand("rename");
 		PluginCommand hatCmd = getCommand("hat");
-		
+
 		PluginCommand mailStaffCmd = getCommand("mailstaff");
 		PluginCommand oneBCmd = getCommand("oneb");
 
 		PluginCommand spyCmd = getCommand("onebcommandspy");
 		PluginCommand msgCmd = getCommand("onebfakemessage");
 
-		// PluginCommand mmoCmd = getCommand("oneb-mmo");
+		PluginCommand warpTaxCmd = getCommand("warptax");
 
 		// Prefix usage messages
 		prefixUsages(transCmd, pvpCmd, nameCmd, loreCmd, mailStaffCmd, oneBCmd, msgCmd);
 
-		// prefixUsage(mmoCmd);
-
 		// Set permission messages
-		setPermMsgs(transCmd, transChatCmd, nameCmd, loreCmd, hatCmd, mailStaffCmd, oneBCmd, spyCmd, msgCmd);
-
-		// setPermMsg(mmoCmd);
+		setPermMsgs(transCmd, transChatCmd, nameCmd, loreCmd, hatCmd, mailStaffCmd, oneBCmd, spyCmd, msgCmd,
+				warpTaxCmd);
 
 		transChatPerm = transChatCmd.getPermission();
 
@@ -110,50 +80,25 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 
 		transCmd.setExecutor(new DovahzulExecutor());
 		transChatCmd.setExecutor(new DovahzulChatExecutor());
-		
+
 		pvpCmd.setExecutor(new PvPExecutor());
-		
+
 		RenameExecutor re = new RenameExecutor();
 		loreCmd.setExecutor(re);
 		nameCmd.setExecutor(re);
-		
+
 		hatCmd.setExecutor(new HatExecutor());
-		
+
 		mailStaffCmd.setExecutor(new MailStaffExecutor());
 		oneBCmd.setExecutor(new OneBExecutor());
-		
+
 		spyCmd.setExecutor(new CommandSpyExecutor());
 		msgCmd.setExecutor(new MessageExecutor());
-		
-		
+
+		warpTaxCmd.setExecutor(new WarpTaxExecutor());
+
 		// Set event listeners
 		addListeners(new DovahzulListener(), new PvPListener(), new CommandSpyListener());
-
-		// Here lies the stuff that got trashed (or not done at all)
-		// R.I.P
-		// mmoCmd.setExecutor(new OneBMMOExecutor(this));
-		// Set up the more-hearts-per-player task
-		// startEhTask();
-	}
-
-	// Send prefixed chat message
-	public static void sendMsg(CommandSender receiver, String msg) {
-		receiver.sendMessage(OneB.PREFIX + msg);
-	}
-
-	public static void sendPlayerOnlyMsg(CommandSender console) {
-		sendMsg(console, "Only a player can use this command!");
-	}
-
-	public static String concat(String[] array) {
-		String conced = "";
-		for (int i = 0; i < array.length; i++) {
-			conced += array[i];
-			if (i < array.length - 1) {
-				conced += " ";
-			}
-		}
-		return conced;
 	}
 
 	// How many times does it say "listener" in the next few lines?
@@ -164,14 +109,141 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 		}
 	}
 
-	private static OneB inst;
+	private static void prefixUsages(PluginCommand... cmds) {
+		for (PluginCommand cmd : cmds) {
+			cmd.setUsage(PREFIX + "Usage: /<command> " + cmd.getUsage());
+		}
+	}
+
+	private static void setPermMsgs(PluginCommand... cmds) {
+		for (PluginCommand cmd : cmds) {
+			cmd.setPermissionMessage(PREFIX + "Access denied.");
+		}
+	}
+
+	/**
+	 * Make a dark aqua prefix enclosed in square brackets out of the given
+	 * string
+	 * 
+	 * @param str
+	 *            The string to make into a prefix
+	 * @return The generated prefix
+	 */
+
+	public static String makePrefix(String str) {
+		return ChatColor.DARK_AQUA + "[" + str + "] " + ChatColor.RESET;
+	}
+
+	/**
+	 * Get metadata from a {@link Metadatable} object
+	 * 
+	 * @param player
+	 *            The object to get metadata from
+	 * @param key
+	 *            The key of the metadata to get
+	 * @return the first metadata value
+	 */
+
+	public static MetadataValue getMetadata(Metadatable player, String key) {
+		return player.getMetadata(key).get(0);
+	}
+
+	/**
+	 * Set the metadata of a {@link Player} or other {@link Metadatable} object to a
+	 * {@link FixedMetadataValue}
+	 * 
+	 * @param player
+	 *            The object to add metadata to
+	 * @param key
+	 *            The metadata key to add
+	 * @param value
+	 *            The metadata value to add
+	 */
+
+	public static void setFixedMetadata(Metadatable player, String key, Object value) {
+		player.setMetadata(key, new FixedMetadataValue(inst, value));
+	}
+
+	/**
+	 * Remove metadata from a {@link Metadatable} object
+	 * 
+	 * @param player
+	 *            The object to remove metadata from
+	 * @param key
+	 *            The key of the metadata to remove
+	 */
+
+	public static void removeMetadata(Metadatable player, String key) {
+		player.removeMetadata(key, inst);
+	}
+
+	/**
+	 * Send a chat message prefixed with [OneB]
+	 * 
+	 * @param receiver
+	 *            The receiver of the message
+	 * @param msg
+	 *            The message to send
+	 */
+
+	public static void sendMsg(CommandSender receiver, String msg) {
+		receiver.sendMessage(OneB.PREFIX + msg);
+	}
+
+	/**
+	 * Send an "Only a player can use this command!" message
+	 * 
+	 * @param console
+	 *            The {@link CommandSender} to send the message to
+	 */
+
+	public static void sendPlayerOnlyMsg(CommandSender console) {
+		sendMsg(console, "Only a player can use this command!");
+	}
+
+	/**
+	 * Concatenate an array of strings into a single string, with each element
+	 * seperated by a space
+	 * 
+	 * @param array
+	 *            The array to concatenate
+	 * @return The concatenated string
+	 */
+
+	public static String concat(String[] array) {
+		String conced = "";
+		for (int i = 0; i < array.length; i++) {
+			conced += array[i];
+			if (i < array.length - 1) {
+				conced += ' ';
+			}
+		}
+		return conced;
+	}
+
+	/**
+	 * Get an instance of the plugin "Essentials"
+	 * 
+	 * @return The instance
+	 */
+
+	public static IEssentials getEss() {
+		IEssentials ess = (IEssentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
+		if (ess == null) {
+			String msg = "Essentials isn't installed! Error! Error! Error!";
+			Bukkit.getLogger().severe(msg);
+			Bukkit.getServer().broadcastMessage(PREFIX + msg);
+		}
+		return ess;
+	}
 
 	/**
 	 * Get the instance of this class
 	 * 
 	 * @return the instance
 	 */
-	public static OneB inst() {
+
+	public static OneB getInst() {
 		return inst;
 	}
 }
