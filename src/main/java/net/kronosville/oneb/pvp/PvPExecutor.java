@@ -10,7 +10,7 @@ public final class PvPExecutor implements org.bukkit.command.CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (args[0].equalsIgnoreCase("list")) {
+		if (args.length > 0 && args[0].equalsIgnoreCase("list")) {
 			// List the players anyway, then tell them to use tab next time.
 			PvP.listPlayers(sender);
 			OneB.sendMsg(sender, "NOTICE: Please just use the player (tab) list next time; the names of players who have PvP on will show up in red.");
