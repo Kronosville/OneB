@@ -45,7 +45,7 @@ public final class HatExecutor implements org.bukkit.command.CommandExecutor {
 			}
 
 		} else {
-			OneB.sendPlayerOnlyMsg(sender);
+			OneB.sendMsg(sender, OneB.PLAYERS_ONLY);
 		}
 		return true;
 	}

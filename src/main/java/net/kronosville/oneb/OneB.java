@@ -39,10 +39,15 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 	// Enabled/disabled strings
 	public static final String ENABLED = ChatColor.GREEN + "enabled" + ChatColor.RESET;
 	public static final String DISABLED = ChatColor.RED + "disabled" + ChatColor.RESET;
+	
+	// Messages
+	public static final String ACCESS_DENIED = "Access denied.";
+	public static final String PLAYERS_ONLY = "Only a player can use this command!";
 
 	private static OneB inst;
 
 	public static String transChatPerm;
+	public static String adminPerm;
 
 	@Override
 	public void onEnable() {
@@ -75,6 +80,7 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 				warpTaxCmd);
 
 		transChatPerm = transChatCmd.getPermission();
+		adminPerm = oneBCmd.getPermission();
 
 		// Set command executors
 
@@ -117,7 +123,7 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 
 	private static void setPermMsgs(PluginCommand... cmds) {
 		for (PluginCommand cmd : cmds) {
-			cmd.setPermissionMessage(PREFIX + "Access denied.");
+			cmd.setPermissionMessage(PREFIX + ACCESS_DENIED);
 		}
 	}
 
@@ -188,17 +194,6 @@ public final class OneB extends org.bukkit.plugin.java.JavaPlugin {
 
 	public static void sendMsg(CommandSender receiver, String msg) {
 		receiver.sendMessage(OneB.PREFIX + msg);
-	}
-
-	/**
-	 * Send an "Only a player can use this command!" message
-	 * 
-	 * @param console
-	 *            The {@link CommandSender} to send the message to
-	 */
-
-	public static void sendPlayerOnlyMsg(CommandSender console) {
-		sendMsg(console, "Only a player can use this command!");
 	}
 
 	/**

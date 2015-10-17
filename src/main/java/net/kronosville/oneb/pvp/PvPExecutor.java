@@ -17,7 +17,7 @@ public final class PvPExecutor implements org.bukkit.command.CommandExecutor {
 		} else if (sender instanceof Player) {
 			PvP.togglePvPState((Player) sender);
 		} else {
-			OneB.sendPlayerOnlyMsg(sender);
+			OneB.sendMsg(sender, OneB.PLAYERS_ONLY);
 		}
 		return true;
 	}

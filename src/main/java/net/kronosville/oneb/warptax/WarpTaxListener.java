@@ -16,10 +16,12 @@ public final class WarpTaxListener implements org.bukkit.event.Listener {
 	// When a player joins...
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerJoin(PlayerJoinEvent event) {
-		for (Map.Entry<String, City> city : WarpTax.getCities().entrySet()) {
-			if (!city.getValue().warpTaxPaid) {
+		for (Map.Entry<String, City> entry : City.getCities().entrySet()) {
+			City city = entry.getValue();
+			
+			if (city.accepted && !city.warpTaxPaid) {
 				Player player = event.getPlayer();
-				String cityName = city.getKey();
+				String cityName = entry.getKey();
 				
 				OneB.sendMsg(player, "You haven't paid the warp tax for " + cityName +
 						" yet! (" + Economy.format(WarpTax.getTaxAmount()) + "). Type \"/warptax pay " +

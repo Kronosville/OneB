@@ -97,7 +97,7 @@ public final class RenameExecutor implements org.bukkit.command.CommandExecutor 
 			}
 			return false;
 		}
-		OneB.sendPlayerOnlyMsg(sender);
+		OneB.sendMsg(sender, OneB.PLAYERS_ONLY);
 		return true;
 	}
 }

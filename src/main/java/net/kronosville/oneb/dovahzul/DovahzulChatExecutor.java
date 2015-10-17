@@ -13,7 +13,7 @@ public class DovahzulChatExecutor implements org.bukkit.command.CommandExecutor 
 		if (sender instanceof Player) {
 			Dovahzul.toggleDChatState((Player) sender);
 		} else {
-			OneB.sendPlayerOnlyMsg(sender);
+			OneB.sendMsg(sender, OneB.PLAYERS_ONLY);
 		}
 		return true;
 	}

@@ -6,6 +6,8 @@ import net.kronosville.oneb.OneB;
 
 public enum Confirming {
 
+	NONE,
+
 	/**
 	 * Applying for a warp
 	 */
@@ -16,9 +18,7 @@ public enum Confirming {
 	 * Paying tax for a registered warp
 	 */
 
-	PAYING,
-	
-	NONE;
+	PAYING;
 
 	private static final String META = "warpTaxConfirming";
 
