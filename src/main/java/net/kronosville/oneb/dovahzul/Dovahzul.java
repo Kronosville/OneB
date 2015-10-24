@@ -70,7 +70,7 @@ public final class Dovahzul {
 		}
 		
 		try {
-			URL translator = new URL("http://thuum.org/translate-" + lang + ".php?text=" + ChatColor.translateAlternateColorCodes('&', msg.replaceAll(" ", "%20")));
+			URL translator = new URL("https://www.thuum.org/translate-" + lang + ".php?text=" + ChatColor.translateAlternateColorCodes('&', msg.replaceAll(" ", "%20")));
 			BufferedReader in = new BufferedReader(
 					new InputStreamReader(translator.openStream()));
 			String outputLine;
