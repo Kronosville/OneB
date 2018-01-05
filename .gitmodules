@@ -1,0 +1,6 @@
+[submodule "docs/_layouts"]
+	path = docs/_layouts
+	url = https://github.com/Kronosville/jekyll-layouts.git
+[submodule "docs/_includes"]
+	path = docs/_includes
+	url = https://gist.github.com/1106e69de1157c51c3ee.git
